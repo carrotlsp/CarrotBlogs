@@ -14,7 +14,7 @@ date: 2022-05-29 11:30:38
 
 - 时域遮蔽、频域遮蔽
 
-<img src="day08音频AAC编码/image-20220529103700600.png" alt="image-20220529103700600" style="zoom: 33%;" />
+![](day08音频AAC编码/image-20220529103700600.png)
 
 ### 2、音频`无损压缩`有哪些有名的算法？
 
@@ -44,13 +44,13 @@ date: 2022-05-29 11:30:38
 - ADIF
 - ADTS
 
-<img src="day08音频AAC编码/image-20220529105427279.png" alt="image-20220529105427279" style="zoom:33%;" />
+![](day08音频AAC编码/image-20220529105427279.png)
 
 
 
 ### 6、ADTS结构详解？
 
-<img src="day08音频AAC编码/image-20220529105523745.png" alt="image-20220529105523745" style="zoom: 50%;" />
+![](day08音频AAC编码/image-20220529105523745.png)
 
 ### 7、通过ffmpeg命令生成aa文件
 
@@ -64,5 +64,5 @@ ffmpeg -i raw_xxx.mp4 -vn -c:a libfdk_aac -ar 44100 -channels 2 -profile:a aac_h
 
 - https://www.p23.nl/projects/aac-header/
 
-<img src="day08音频AAC编码/image-20220529110152214.png" alt="image-20220529110152214" style="zoom: 50%;" />
+![](day08音频AAC编码/image-20220529110152214.png)
 
