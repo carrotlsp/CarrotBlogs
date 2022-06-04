@@ -1,7 +1,7 @@
 ---
 title: day08-音频AAC编码理论(二) 
 categories:
-  - 音视频
+  - 音视频入门课
 tags:
   - 音视频
   - ffmpeg

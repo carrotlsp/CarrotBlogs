@@ -1,7 +1,7 @@
 ---
 title: day07-ffmpeg集成、音频采集
 categories:
-  - 音视频
+  - 音视频入门课
 tags:
   - 音视频
   - ffmpeg

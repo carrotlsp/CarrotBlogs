@@ -1,7 +1,7 @@
 ---
 title: day01-入门基础篇
 categories:
-  - 音视频
+  - 音视频入门课
 tags:
   - 音视频
   - Mac命令

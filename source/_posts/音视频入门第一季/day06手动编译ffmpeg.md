@@ -1,7 +1,7 @@
 ---
 title: day06-ffmpeg编译
 categories:
-  - 音视频
+  - 音视频入门课
 tags:
   - 音视频
 date: 2022-05-28 18:08:32
