@@ -1,5 +1,5 @@
 ---
-title: day09-视频基础、YUV
+title: day09-视频基础、认识YUV、采集摄像头YUV数据
 categories:
   - 音视频入门课
 tags:
@@ -65,7 +65,7 @@ date: 2022-06-04 10:15:38
 
 
 
-## 一、YUV
+## 二、认识YUV
 
 ### 1、YUV中的Y是什么？UV是什么？
 
