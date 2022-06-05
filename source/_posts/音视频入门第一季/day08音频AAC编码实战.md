@@ -303,13 +303,14 @@ ffplay he_audio.aac
 
 
 ```C
-#include "testc.h"
+#include "test.h"
+#include <unistd.h>
+#include "include/libavutil/avutil.h"
+#include "include/libavdevice/avdevice.h"
+#include "include/libavcodec/avcodec.h"
+#include "include/libswresample/swresample.h"
+
 #include <string.h>
-#include "libavutil/avutil.h"
-#include "libavdevice/avdevice.h"
-#include "libavformat/avformat.h"
-#include "libavcodec/avcodec.h"
-#include "libswresample/swresample.h"
 
 static int rec_status = 0;
 
@@ -368,7 +369,7 @@ static AVCodecContext* open_coder(){
     codec_ctx->channels = 2;                            //输入音频 channel 个数
     codec_ctx->sample_rate = 44100;                     //输入音频的采样率
     codec_ctx->bit_rate = 0; //AAC_LC: 128K, AAC HE: 64K, AAC HE V2: 32K
-    codec_ctx->profile = FF_PROFILE_AAC_HE_V2; //阅读 ffmpeg 代码
+    codec_ctx->profile = FF_PROFILE_AAC_HE; //阅读 ffmpeg 代码
     
     //打开编码器
     if(avcodec_open2(codec_ctx, codec, NULL)<0){
@@ -552,8 +553,13 @@ void read_data_and_encode(AVFormatContext *fmt_ctx, //
     alloc_data_4_resample(&src_data, &src_linesize, &dst_data, &dst_linesize);
     
     //read data from device
-    while((ret = av_read_frame(fmt_ctx, &pkt)) == 0 && rec_status) {
+    while(rec_status) {
+        ret = av_read_frame(fmt_ctx, &pkt);
         
+        if (pkt.size <= 0) {
+            usleep(300);
+            continue;
+        }
         //进行内存拷贝，按字节拷贝的
         memcpy((void*)src_data[0], (void*)pkt.data, pkt.size);
         
@@ -609,7 +615,7 @@ void rec_audio() {
     
     //create file
     //char *out = "/Users/lichao/Downloads/av_base/audio.pcm";
-    char *out = "/Users/lichao/Downloads/av_base/audio.aac";
+    char *out = "/Users/carrot/Desktop/MyCode/audio.aac";
     FILE *outfile = fopen(out, "wb+");
     if(!outfile){
         printf("Error, Failed to open file!\n");
@@ -672,5 +678,13 @@ int main(int argc, char *argv[])
     return 0;
 }
 #endif
+```
+
+
+
+- 播放上述录音
+
+```sh
+ffplay audio.aac
 ```
 
