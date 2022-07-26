@@ -267,7 +267,13 @@ killall turnserver
 
 
 
-### 6、一些有用的参考文章
+### 6、Ubuntu14安装coturn参考
+
+https://blog.csdn.net/tanyhuan/article/details/77265349
+
+
+
+### 7、一些有用的参考文章
 
 https://www.jianshu.com/p/915eab39476d
 
