@@ -83,7 +83,7 @@ git clone获取depot_tools
 git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
 ```
 
-将depot_tools的路径配置到环境变量中
+将depot_tools的路径配置到环境变量中(只是当次生效)
 
 ```routeros
 export PATH=$PWD/depot_tools:$PATH
@@ -98,27 +98,50 @@ fetch --nohooks webrtc_ios
 gclient sync
 ```
 
-默认下载的是最新的源码，如果想要切换到指定分支，可以使用以下命令：
-
-```mipsasm
-# 查看可用版本分支
-git branch -r
-# 切换到m79分支
-git checkout branch-heads/m79
-gclient sync
-# 或者强制切换到指定commit（b484ec0082948ae086c2ba4142b4d2bf8bc4dd4b是m79最后一次提交的commit id）
-gclient sync -r b484ec0082948ae086c2ba4142b4d2bf8bc4dd4b --force
-```
-
-[可以在从这里获取webrtc所有release版本的信息](https://link.segmentfault.com/?enc=1eawLpdlwuggWFandAe3yA%3D%3D.ytdz0xpOZcM0IpYUvf2%2B65IcPLFY4c5NqXvnkBnneGU%2BnLMGSIlB5buxIcEhA2fW)
-
 #### 编译
 
 Mac版本：
 
 ```jboss-cli
+cd src
 gn gen out/mac-release --args='target_os="mac" target_cpu="x64" is_debug=false use_rtti=true is_component_build=false rtc_use_h264=false rtc_include_tests=false' --ide=xcode
 ninja -C out/mac-release
 ```
 
+iOS版本(不带证书)：
+
+```shell
+cd src
+
+# 编译不带证书版本
+gn gen out/ios-release --args='target_os="ios" target_cpu="arm64" is_debug=false use_rtti=true is_component_build=false ios_enable_code_signing=false proprietary_codecs=false rtc_use_h264=false rtc_include_tests=false' --ide=xcode
+ninja -C out/ios-release
+```
+
+iOS版本(带证书)：
+
+```shell
+cd src
+# 获取证书名
+security find-identity -v -p codesigning
+
+# 编译带证书版本（我没成功，每次报证书id不对）
+gn gen out/ios-release-sign --args='target_os="ios" target_cpu="arm64" is_debug=false use_rtti=true is_component_build=false  ios_code_signing_identity="你的整数id" proprietary_codecs=false rtc_use_h264=false rtc_include_tests=false' --ide=xcode
+
+# 最终成功编译的语句（保证电脑上只有一个证书，去keychian中删除，让它内部自动选择）
+gn gen out/ios-release-sign --args='target_os="ios" target_cpu="arm64" ios_enable_code_signing=true rtc_include_tests=false' --ide=xcode
+
+# 运行 APPRTCMobile，需要根据xcode提示，更改一下BundleID
+```
+
 编译成功后会在src\out\xxxx\下生成all.xcworkspace文件。打开就可以构建、调试webrtc的项目。其中APPRTCMobile是谷歌提供的示例demo，可以在Mac下直接编译运行。
+
+
+
+运行成功，手机上会出现以下app和运行成功的界面：
+
+
+
+![image-20220925095507770](day03-WebRTC源码环境/image-20220925095507770.png)
+
+![image-20220925095513846](day03-WebRTC源码环境/image-20220925095513846.png)
