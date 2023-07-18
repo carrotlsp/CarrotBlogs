@@ -103,3 +103,108 @@ categories:
 
 ![image-20230624084318070](day12-WebRTC服务质量2-RTCP协议/image-20230624084318070.png)
 
+## 三、SDES 类型的RTCP(暂时了解作用即可)
+
+### 1、WebRTC中使用SDES干啥？
+
+- SDES 全称是 Source Description 报文。它属于RTCP协议的一部分，用于描述RTP流的发送者(源)信息。
+- 例如 ：
+- CNAME: Sources的唯一名字,通常是一个域名,用于唯一标识一个发送者。
+- NAME: 发送者的名字,可选。 
+
+![image-20230625065600861](day12-WebRTC服务质量2-RTCP协议/image-20230625065600861.png)
+
+
+
+
+
+### 2、SDES的报文格式是怎么样的？
+
+![image-20230625065101826](day12-WebRTC服务质量2-RTCP协议/image-20230625065101826.png)
+
+![image-20230625065249629](day12-WebRTC服务质量2-RTCP协议/image-20230625065249629.png)
+
+
+
+![image-20230625065314157](day12-WebRTC服务质量2-RTCP协议/image-20230625065314157.png)
+
+![image-20230625065325836](day12-WebRTC服务质量2-RTCP协议/image-20230625065325836.png)
+
+
+
+## 四、BYE 、APP类型的RTCP报文
+
+
+
+### 1、BYE报文的作用？
+
+- **作用：如果想让哪个SSRC不要再传输数据了，就向该SSRC发送BYE报文即可。**
+
+### 2、BYE报文的格式？
+
+![image-20230625070217862](day12-WebRTC服务质量2-RTCP协议/image-20230625070217862.png)
+
+
+
+### 3、APP类型的报文作用？
+
+- 可以自定义RTCP消息，做到私有协议的效果。
+
+
+
+### 4、APP类型的报文结构？
+
+![image-20230625070454165](day12-WebRTC服务质量2-RTCP协议/image-20230625070454165.png)
+
+![image-20230625070537339](day12-WebRTC服务质量2-RTCP协议/image-20230625070537339.png)
+
+
+
+## 四、RTCP FB Type 类型的RTCP报文
+
+### 1、认识 RTCP FB Type的报文有哪些？
+
+
+
+![image-20230625070722439](day12-WebRTC服务质量2-RTCP协议/image-20230625070722439.png)
+
+![image-20230625070757791](day12-WebRTC服务质量2-RTCP协议/image-20230625070757791.png)
+
+![image-20230625070823106](day12-WebRTC服务质量2-RTCP协议/image-20230625070823106.png)
+
+![image-20230625070846131](day12-WebRTC服务质量2-RTCP协议/image-20230625070846131.png)
+
+![image-20230625071415927](day12-WebRTC服务质量2-RTCP协议/image-20230625071415927.png)
+
+## 四、认识Compound RTCP
+
+### 1、什么是 Compound RTCP呢？
+
+- 将多个RTCP包放到同一个UDP包中发送
+- 它们像栈一样存放，一个放在另一个后面，串联在一起
+- 每个RTCP包之间，不需要明确的分割
+
+
+
+### 2、Compound RTCP的规则？
+
+
+
+![image-20230625073452799](day12-WebRTC服务质量2-RTCP协议/image-20230625073452799.png)
+
+![image-20230625073536837](day12-WebRTC服务质量2-RTCP协议/image-20230625073536837.png)
+
+
+
+![image-20230625073606983](day12-WebRTC服务质量2-RTCP协议/image-20230625073606983.png)
+
+
+
+### 3、一个具体的抓包例子
+
+
+
+![image-20230625073632357](day12-WebRTC服务质量2-RTCP协议/image-20230625073632357.png)
+
+![image-20230625073652128](day12-WebRTC服务质量2-RTCP协议/image-20230625073652128.png)
+
