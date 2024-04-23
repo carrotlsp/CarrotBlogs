@@ -5,7 +5,7 @@ tags:
 	- 指针
 	- 地址
 categories: 
-	- C语言
+	- C++
 
 ---
 
